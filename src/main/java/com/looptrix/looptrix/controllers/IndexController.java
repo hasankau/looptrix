@@ -21,11 +21,6 @@ public class IndexController {
         this.objectMapper = objectMapper;
     }
 
-    @GetMapping("/")
-    public String index() {
-        return "index";
-    }
-
     @GetMapping("/users")
     public String users() {
         try {

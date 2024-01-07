@@ -7,17 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @GetMapping("/signup")
-    public String signup() {
-        return "user_signup";
-    }
 
     @PostMapping("/user/create")
     public String storeUser(@RequestParam String userName, String password, String email, String firstName,
