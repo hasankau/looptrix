@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public User createUser(User user) {
-        user.setPassword(hashPassword.encode(user.getPassword()));
+        user.setPassword(user.getPassword());
         return userRepository.save(user);
     }
 
@@ -43,7 +43,7 @@ public class UserService {
         }
     }
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
