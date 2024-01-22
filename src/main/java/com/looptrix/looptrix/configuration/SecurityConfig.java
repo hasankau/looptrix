@@ -14,28 +14,31 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/").permitAll()
-                        .anyRequest().authenticated())
-                .formLogin((form) -> form
-                        .loginPage("/signup")
-                        .permitAll())
-                .logout((logout) -> logout.permitAll());
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                http
+                                .authorizeRequests(authorizeRequests -> authorizeRequests
+                                                .requestMatchers("/", "/signup").permitAll() // Permit access to these
+                                                                                             // URLs
+                                                .requestMatchers("/user/store").permitAll() // Permit access to
+                                                                                            // /user/store
+                                                .anyRequest().authenticated())
+                                .formLogin((form) -> form
+                                                .loginPage("/signup")
+                                                .permitAll())
+                                .logout((logout) -> logout.permitAll());
 
-        return http.build();
-    }
+                return http.build();
+        }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("password")
-                .roles("USER")
-                .build();
+        @Bean
+        public UserDetailsService userDetailsService() {
+                UserDetails user = User.withDefaultPasswordEncoder()
+                                .username("user")
+                                .password("password")
+                                .roles("USER")
+                                .build();
 
-        return new InMemoryUserDetailsManager(user);
-    }
+                return new InMemoryUserDetailsManager(user);
+        }
 }

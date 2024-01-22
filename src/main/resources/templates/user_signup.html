@@ -64,7 +64,7 @@
         </div>
 
         <div class="card-body">
-          <form id="userForm" th:action="@{/user/store}" th:object="${userForm}" >
+          <form id="userForm" th:action="@{/user/store}" th:object="${userForm}" method="post">
             <label for="userName">Username:</label><br>
             <input type="text" id="userName" th:field="*{userName}"  name="userName"><br>
     
